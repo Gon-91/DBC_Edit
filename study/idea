@@ -1,0 +1,33 @@
+my-project/
+├─ README.md                 # 프로젝트 요약 (입구)
+├─ TODO.md                   # 전체 할 일 관리
+├─ CHANGELOG.md              # 변경 이력 (선택)
+│
+├─ docs/                     # 📘 설계/문서
+│  ├─ index.md               # 문서 허브
+│  ├─ architecture.md        # 전체 구조
+│  ├─ decisions/             # 설계 결정 기록 (ADR)
+│  │  ├─ 001-why-python.md
+│  │  └─ 002-embedding-model.md
+│  └─ how-to/
+│     ├─ setup.md
+│     └─ run.md
+│
+├─ study/                    # 📚 공부 정리
+│  ├─ index.md
+│  ├─ python/
+│  │  ├─ async.md
+│  │  └─ typing.md
+│  ├─ ml/
+│  │  └─ rag.md
+│  └─ summary.md
+│
+├─ logs/                     # 📝 작업 로그 (날짜별)
+│  ├─ 2025-01-10.md
+│  └─ 2025-01-15.md
+│
+├─ src/                      # 💻 코드
+│  └─ ...
+│
+└─ .vscode/
+   └─ settings.json

@@ -52,6 +52,11 @@ BO_ 163 Message_163: 32 Vector__XXX
  SG_ I_HV_Inverter_EM_rear_2 : 7|14@0+ (0.1,-818.6) [0|0] "A" Vector__XXX
  SG_ U_HV_Inverter_EM_rear_2 : 247|14@0+ (0.1,0) [0|0] "V" Vector__XXX
 
+BO_ 188 Message_188: 32 Vector__XXX
+ SG_ I_HV_Inverter_EM_rear_2 : 7|14@0+ (0.1,-818.6) [0|0] "A" Vector__XXX
+ SG_ U_HV_Inverter_EM_rear_2 : 247|14@0+ (0.1,0) [0|0] "V" Vector__XXX
+
+
 
 
 BA_DEF_ BO_  "CANFD_BRS" ENUM  "0","1";

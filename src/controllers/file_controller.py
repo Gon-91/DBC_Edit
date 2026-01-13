@@ -12,18 +12,21 @@ from services.dbc_loader import load_dbc_file
 class FileController:
 
     def __init__(self,data_model):
-        self.data_model = data_model
+        self.model = data_model
 
 
     def open_file(self, file_path: str):
-        self.data_model.add_file(load_dbc_file(file_path))
+        self.model.add_file(load_dbc_file(file_path))
 
+        #log 
         print("File Controller : open_file_called")
-        print("File opened : ", file_path)
+    
+
+    def close_file(self, file_name : str) :
+        self.model.remove_file(file_name)
+
+        #log 
+        print("File Controller : close_file_called")
         
 
 
-
-#if __name__ == "__main__":
-#    controller = filecontrooler()
-#    controller.read_file("./src/control/sample.dbc")

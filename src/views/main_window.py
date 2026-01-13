@@ -14,6 +14,11 @@ from views.widgets.main_widget import MainWidget
 from views.widgets.signallistwidget import SignalListDock
 
 
+from views.docks.explorer_dock import ExplorerDock
+
+from viewmodels.explorer_view_model import ExplorerViewModel
+
+
 class MainWindow(QMainWindow):
     def __init__(
             self,
@@ -25,6 +30,7 @@ class MainWindow(QMainWindow):
         #self.file_controller = file_controller
         self.model = model
         self.usecase = usecase
+        self.vm = ExplorerViewModel(self.model)
         self._init_ui()
 
 
@@ -36,30 +42,42 @@ class MainWindow(QMainWindow):
         menu_bar = MenuBar(self, self.usecase)
         self.setMenuBar(menu_bar)
 
-        # File list widget
-        self.file_list_dock = FileListDock(self.model)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.file_list_dock)
-
-        # Message list widget
-        self.message_list_dock = MessageListDock(self.model)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.message_list_dock)
-
-        self.file_list_dock.setAllowedAreas(Qt.LeftDockWidgetArea)
-        self.message_list_dock.setAllowedAreas(Qt.LeftDockWidgetArea)
-
-        self.tabifyDockWidget(self.file_list_dock, self.message_list_dock)
-
-
-        # Center widget ( signal list and layout)
-
-        # Signal list widget
-        self.MainWidget = MainWidget(self.model)
-        self.setCentralWidget(self.MainWidget)
+        self.explorer_dock = ExplorerDock(self.vm)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.explorer_dock)
 
 
 
-        self.file_list_dock.raise_()
-        self.setDockOptions(
-            QMainWindow.DockOption.AllowTabbedDocks |
-            QMainWindow.DockOption.AnimatedDocks
-        )
+
+
+
+
+
+#        ###======ORG code
+#
+#        # File list widget
+#        self.file_list_dock = FileListDock(self.model)
+#        self.addDockWidget(Qt.LeftDockWidgetArea, self.file_list_dock)
+#
+#        # Message list widget
+#        self.message_list_dock = MessageListDock(self.model)
+#        self.addDockWidget(Qt.LeftDockWidgetArea, self.message_list_dock)
+#
+#        self.file_list_dock.setAllowedAreas(Qt.LeftDockWidgetArea)
+#        self.message_list_dock.setAllowedAreas(Qt.LeftDockWidgetArea)
+#
+#        self.tabifyDockWidget(self.file_list_dock, self.message_list_dock)
+#
+#
+#        # Center widget ( signal list and layout)
+#
+#        # Signal list widget
+#        self.MainWidget = MainWidget(self.model)
+#        self.setCentralWidget(self.MainWidget)
+#
+#
+#
+#        self.file_list_dock.raise_()
+#        self.setDockOptions(
+#            QMainWindow.DockOption.AllowTabbedDocks |
+#            QMainWindow.DockOption.AnimatedDocks
+#        )

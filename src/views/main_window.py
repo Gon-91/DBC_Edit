@@ -10,13 +10,14 @@ from views.widgets.filelistwidget import FileListDock
 from views.widgets.messagelistwidget import MessageListDock
 
 
-from views.widgets.main_widget import MainWidget
+from views.widgets.T_centeral_widget import CenteralWidget
 from views.widgets.signallistwidget import SignalListDock
 
 
 from views.docks.explorer_dock import ExplorerDock
 
 from viewmodels.explorer_view_model import ExplorerViewModel
+from viewmodels.central_view_model import CentralViewModel
 
 
 class MainWindow(QMainWindow):
@@ -30,7 +31,8 @@ class MainWindow(QMainWindow):
         #self.file_controller = file_controller
         self.model = model
         self.usecase = usecase
-        self.vm = ExplorerViewModel(self.model)
+        self.explorer_vm = ExplorerViewModel(self.model)
+        self.central_vm = CentralViewModel(self.model)
         self._init_ui()
 
 
@@ -42,11 +44,11 @@ class MainWindow(QMainWindow):
         menu_bar = MenuBar(self, self.usecase)
         self.setMenuBar(menu_bar)
 
-        self.explorer_dock = ExplorerDock(self.vm)
+        self.explorer_dock = ExplorerDock(self.explorer_vm,self.usecase)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.explorer_dock)
 
-
-
+        self.central_widget = CenteralWidget(self.central_vm,self.usecase)
+        self.setCentralWidget(self.central_widget)
 
 
 

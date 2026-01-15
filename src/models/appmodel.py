@@ -10,6 +10,8 @@ class AppModel(QObject):
     #file_added = Signal(object) # list[str]
     #file_removed = Signal(object)
     files_changed = Signal(list)
+    file_selected = Signal(object)
+    message_selected = Signal(object)
     current_file_changed = Signal(object)
     current_message_changed = Signal(object)
 
@@ -52,15 +54,51 @@ class AppModel(QObject):
 
 
         #log 
-        print("File Model : remove_file")
+        print("Model : remove_file")
 
         # emit 
         self.files_changed.emit(self._get_files_names())
 
+    def select_file(self,file_name) :
+
+        for dbc_file in self._dbc_files :
+
+            if dbc_file.file_name == file_name :
+                self._current_dbc_file = dbc_file
+                break
+
+        self.file_selected.emit(self._current_dbc_file.messages)
+        #log 
+        print("Model : select_file")
+
+    def select_message(self,select_message) :
+
+        dbc_file = self._current_dbc_file
+        messages = dbc_file.messages
+        message = None
+        for msg in messages :
+            if msg.id == select_message.id and msg.name == select_message.name and msg.length == select_message.length : 
+                message = msg 
+                break
+        self.message_selected.emit(message)
+
+        #log 
+        print("Model : select_message")
+
+
+
+
     # === INTERNAL ===
 
     def _get_files_names(self) -> list[str]:
+        #log 
+        print("Model(internal) : _get_files_names")
         return [file.file_name for file in self._dbc_files]
+
+
+
+
+
 
 
 

@@ -28,5 +28,8 @@ class FileController:
         #log 
         print("File Controller : close_file_called")
         
+    def select_file(self, file_name : str) :
+        self.model.select_file(file_name)
 
-
+        #log 
+        print("File Controller : select_file_called")

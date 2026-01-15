@@ -6,8 +6,11 @@ class FileTab(QWidget):
         super().__init__()
 
         layout = QVBoxLayout(self)
-        self.filelistwidget = FileListWidget
-        layout.addWidget(self.filelist)
+        self.filelistwidget = FileListWidget()
+        layout.addWidget(self.filelistwidget)
     
-    def update(self,filelist):
-        self.filelistwidget.update(filelist)
+    def update_filelist(self,filelist):
+        self.filelistwidget.update_filelist(filelist)
+
+    def remove_file(self):
+        self.filelistwidget.remove_file()

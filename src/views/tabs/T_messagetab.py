@@ -6,6 +6,8 @@ class MessageTab(QWidget):
         super().__init__()
 
         layout = QVBoxLayout(self)
-        self.table = MessageTableWidget
+        self.table = MessageTableWidget()
         layout.addWidget(self.table)
         
+    def update_messagelist(self,messagelist) :
+        self.table.update_messagelist(messagelist)

@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout
-from views.widgets.T_filelist_widget import FileListWidget
+from views.widgets.filelist_widget import FileListWidget
 
 class FileTab(QWidget):
     def __init__(self):

@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QTableWidget ,  QAbstractItemView, QHeaderView,QTableWidgetItem,QSizePolicy,QPushButton,QColorDialog,QComboBox
+from PySide6.QtWidgets import QTableWidget , QTableView, QAbstractItemView, QHeaderView,QTableWidgetItem,QSizePolicy,QPushButton,QColorDialog,QComboBox,QStyledItemDelegate
 from PySide6.QtGui import QColor
 from PySide6.QtCore import QObject, Signal,QAbstractTableModel,QModelIndex,Qt
 
@@ -126,19 +126,44 @@ class ColorDelegate(QStyledItemDelegate):
         return dlg
 class SignalListView(QTableView):
 
-    def __init__(self, model):
+    def __init__(self):
         super().__init__()
+        #self.setModel(model)
+
+
+
+    def _setmodel(self,model):
         self.setModel(model)
 
-        header = self.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.Fixed)
-        header.resizeSection(0, 20)
-        header.setSectionResizeMode(1, QHeaderView.Stretch)
-
+        # Delegate 설정은 View에서!
         self.setItemDelegateForColumn(0, ColorDelegate(self))
         self.setItemDelegateForColumn(9, OrderDelegate(self))
 
+        header = self.horizontalHeader()
+        # Resize 정책 먼저
+        header.setSectionResizeMode(0, QHeaderView.Fixed)
+        header.setSectionResizeMode(1, QHeaderView.Stretch)
 
+        for col in range(2, 9):
+            header.setSectionResizeMode(col, QHeaderView.Fixed)
+
+        header.setSectionResizeMode(9, QHeaderView.Fixed)
+
+        # 그 다음 폭 설정
+        self.setColumnWidth(0, 20)
+        self.setColumnWidth(1, 120)  # Stretch지만 최소 기준
+        self.setColumnWidth(2, 50)
+        self.setColumnWidth(3, 50)
+        self.setColumnWidth(4, 50)
+        self.setColumnWidth(5, 50)
+        self.setColumnWidth(6, 50)
+        self.setColumnWidth(7, 50)
+        self.setColumnWidth(8, 50)
+        self.setColumnWidth(9, 80)
+
+#        # 전체 위젯 최소 크기
+        self.setMinimumSize(600, 200)
+        self.setMaximumSize(1000, 20000)
 
 #
 #class SignalListWidget(QTableWidget):

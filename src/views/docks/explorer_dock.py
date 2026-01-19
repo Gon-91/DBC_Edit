@@ -2,8 +2,8 @@
 from PySide6.QtWidgets import QDockWidget, QTabWidget
 from PySide6.QtCore import Qt
 
-from views.tabs.T_filetab import FileTab
-from views.tabs.T_messagetab import MessageTab
+from views.tabs.filetab import FileTab
+from views.tabs.messagetab import MessageTab
 
 
 class ExplorerDock(QDockWidget):

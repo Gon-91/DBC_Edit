@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QMenuBar
 
-from views.actions.usecase_action import UsecaseAction
-
+from views.actions import UsecaseAction
 
 class MenuBar(QMenuBar):
     def __init__(self, parent, usecase):

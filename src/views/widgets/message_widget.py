@@ -3,7 +3,7 @@ from PySide6.QtCore import QObject, Signal
 from PySide6.QtCore import Qt
 
 
-from viewmodels.rows import MessageViewData
+from viewmodels.rows.messageviewdata import MessageViewData
 
 class MessageTableWidget(QTableWidget):
 

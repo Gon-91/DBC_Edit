@@ -1,13 +1,6 @@
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
-class MessageViewData:
-    id: str
-    name: str
-    length: int
-
-
-@dataclass(frozen=True)
 class SignalViewData:
     color : str
     name : str

@@ -39,11 +39,11 @@ class MessageTableWidget(QTableWidget):
 
         # ✔ 깔끔한 강조 스타일
         self.setStyleSheet("""
-        QTableWidget::item:selected {
+        ExplorerDock QTableWidget::item:selected {
             background-color: #3a7afe;
             color: white;
         }
-        QTableWidget::item:selected:!active {
+        ExplorerDock QTableWidget::item:selected:!active {
             background-color: #3a7afe;
             color: white;
         }

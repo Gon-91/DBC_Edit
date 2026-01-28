@@ -6,4 +6,4 @@ from . import menu
 from . import widgets
 from . import tabs
 
-__all__ =  ["actions","docks","menu","widgets","tabs"]
+__all__ =  ["MainWindow","actions","docks","menu","widgets","tabs"]

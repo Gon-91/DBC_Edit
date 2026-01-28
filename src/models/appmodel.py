@@ -1,5 +1,8 @@
 
 from models.domainmodels import DBCFile , Message 
+from models.message_signal_model import MessageSignalModel
+
+
 from PySide6.QtCore import QObject, Signal
 
 
@@ -20,6 +23,7 @@ class AppModel(QObject):
         self._dbc_files : list[DBCFile] = []
         self._current_dbc_file : DBCFile | None = None
         self._current_message : Message | None = None
+        self._current_signals : MessageSignalModel | None = None
 
     # === FROM File CONTROL ===
 
@@ -81,7 +85,10 @@ class AppModel(QObject):
             if msg.id == select_message.id and msg.name == select_message.name and msg.length == select_message.length : 
                 message = msg 
                 break
-        self.message_selected.emit(message)
+
+        self._current_signals = MessageSignalModel(message)
+        self.message_selected.emit(self._current_signals)
+
 
         #log 
         print("Model : select_message")

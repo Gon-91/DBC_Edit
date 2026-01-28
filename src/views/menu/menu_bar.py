@@ -9,7 +9,5 @@ class MenuBar(QMenuBar):
         # 1. File
         file_menu = self.addMenu("File")
 
-        #open_usecase = usecase.open_file()
         open_action = UsecaseAction("Open File", parent, usecase.get("file.open"))
-        print("MenuBar init")
         file_menu.addAction(open_action)

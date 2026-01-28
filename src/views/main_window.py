@@ -6,12 +6,9 @@ from controllers.interfaces import FileControllerProtocol
 
 from views.menu.menu_bar import MenuBar
 
-from views.widgets.OLDfilelistwidget import FileListDock
-from views.widgets.OLDmessagelistwidget import MessageListDock
 
 
 from views.widgets.centeral_widget import CenteralWidget
-from views.widgets.OLDsignallistwidget import SignalListDock
 
 
 from views.docks.explorer_dock import ExplorerDock
@@ -19,6 +16,8 @@ from views.docks.explorer_dock import ExplorerDock
 
 from viewmodels import CentralViewModel,ExplorerViewModel
 
+from logger import get_logger
+log = get_logger(__name__)
 
 class MainWindow(QMainWindow):
     def __init__(
@@ -41,8 +40,10 @@ class MainWindow(QMainWindow):
         menu_bar = MenuBar(self, self.usecase)
         self.setMenuBar(menu_bar)
 
+        # 좌측 Dock (파일 및 메시지 셀렉터)
         self.explorer_dock = ExplorerDock(self.explorer_vm,self.usecase)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.explorer_dock)
 
+        # 중앙 메인 Widget ( 시그널 List 및 Layout View)
         self.central_widget = CenteralWidget(self.central_vm,self.usecase)
         self.setCentralWidget(self.central_widget)

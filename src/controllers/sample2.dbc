@@ -43,15 +43,12 @@ BO_ 113 Message_113: 16 Vector__XXX
 BO_ 114 Message_114: 16 Vector__XXX
  SG_ M_EM_rear_2 : 23|15@0+ (0.1,-1638) [0|0] "Nm" Vector__XXX
  SG_ N_EM_rear_2 : 39|16@0+ (1,-32768) [0|0] "rpm" Vector__XXX
-
 BO_ 161 Message_161: 16 Vector__XXX
  SG_ I_HV_Inverter_EM_front_2 : 7|14@0+ (0.1,-818.6) [0|0] "A" Vector__XXX
  SG_ U_HV_Inverter_EM_front_2 : 39|14@0+ (0.1,0) [0|0] "V" Vector__XXX
-
 BO_ 163 Message_163: 32 Vector__XXX
  SG_ I_HV_Inverter_EM_rear_2 : 7|14@0+ (0.1,-818.6) [0|0] "A" Vector__XXX
  SG_ U_HV_Inverter_EM_rear_2 : 247|14@0+ (0.1,0) [0|0] "V" Vector__XXX
-
 BO_ 188 Message_188: 32 Vector__XXX
  SG_ I_HV_Inverter_EM_rear_2 : 7|14@0+ (0.1,-818.6) [0|0] "A" Vector__XXX
  SG_ U_HV_Inverter_EM_rear_2 : 247|14@0+ (0.1,0) [0|0] "V" Vector__XXX

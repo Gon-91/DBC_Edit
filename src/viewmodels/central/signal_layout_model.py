@@ -1,16 +1,16 @@
-from PySide6.QtWidgets import QTableWidget , QTableView, QAbstractItemView, QHeaderView,QTableWidgetItem,QSizePolicy,QPushButton,QColorDialog,QComboBox,QStyledItemDelegate
-from PySide6.QtGui import QColor 
-from PySide6.QtCore import QObject, Signal,QAbstractTableModel,QModelIndex,Qt,QRect
-
+"""
+signal_layout_model.py
+뷰모델 계층: 시그널 레이아웃 뷰모델
+"""
+from PySide6.QtWidgets import QTableWidget, QTableView, QAbstractItemView, QHeaderView, QTableWidgetItem, QSizePolicy, QPushButton, QColorDialog, QComboBox, QStyledItemDelegate
+from PySide6.QtGui import QColor
+from PySide6.QtCore import QObject, Signal, QAbstractTableModel, QModelIndex, Qt, QRect
 from models import MessageSignalModel
 
 class SignalLayoutModel(QObject):
     """
-    SignalLayoutModel
-    -----------------
-    - MessageSignalModel(데이터 모델)의 signal_updated, signal_changed 시그널을 구독합니다.
-    - 데이터 변경(시그널 값 변경, 시그널 추가/삭제 등) 시 layout_changed 시그널을 emit하여 View(UI)에 알립니다.
-    - layout_changed: SignalLayoutView 등에서 구독하여 UI 갱신에 사용.
+    시그널 레이아웃 뷰모델. MessageSignalModel의 signal_updated, signal_changed 시그널을 구독하여
+    데이터 변경 시 layout_changed 시그널을 emit하여 View(UI) 갱신을 유도합니다.
     """
     layout_changed = Signal()
     CELL_W = 80
@@ -18,18 +18,16 @@ class SignalLayoutModel(QObject):
 
     def __init__(self):
         """
-        SignalLayoutModel 생성자
-        - 내부적으로 MessageSignalModel을 참조
+        SignalLayoutModel 생성자: 내부적으로 MessageSignalModel 참조
         """
         super().__init__()
         self._model: MessageSignalModel | None = None
 
-    def set_model(self, model: MessageSignalModel):
+    def set_model(self, model: MessageSignalModel) -> None:
         """
         MessageSignalModel을 교체하고, signal_updated/signal_changed 연결/해제 관리
-        - 이전 모델이 있으면 signal_updated, signal_changed 연결 해제
-        - 새 모델의 signal_updated, signal_changed를 _on_model_changed에 연결
-        - 모델 교체 후 layout_changed 시그널 emit
+        Args:
+            model (MessageSignalModel): 새로운 메시지/시그널 모델
         """
         if self._model:
             try:
@@ -42,16 +40,17 @@ class SignalLayoutModel(QObject):
         self._model.signal_changed.connect(self._on_model_changed)
         self.layout_changed.emit()
 
-    def _on_model_changed(self, *args, **kwargs):
+    def _on_model_changed(self, *args, **kwargs) -> None:
         """
         MessageSignalModel에서 데이터가 변경될 때 호출되어 layout_changed 시그널을 emit합니다.
-        (View에서 이 시그널을 구독하여 UI를 갱신함)
         """
         self.layout_changed.emit()
 
-    def get_signal_rects(self) -> list:
+    def get_signal_rects(self) -> list[tuple[QRect, QColor, object]]:
         """
         현재 메시지의 시그널 정보를 바탕으로 시각화용 rect, color, sig 튜플 리스트 반환
+        Returns:
+            list[tuple[QRect, QColor, object]]: 시각화용 rect, color, sig 튜플 리스트
         """
         if not self._model:
             return []
@@ -82,6 +81,10 @@ class SignalLayoutModel(QObject):
     def _get_signal_color(self, row: int) -> QColor:
         """
         해당 row(시그널)의 색상 반환, 없으면 기본 색상 반환
+        Args:
+            row (int): 시그널의 row 인덱스
+        Returns:
+            QColor: 시그널의 색상
         """
         color = self._model.color(row)
         return color if color else QColor("#CCCCCC")

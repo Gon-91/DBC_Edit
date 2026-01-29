@@ -11,3 +11,7 @@ class MenuBar(QMenuBar):
 
         open_action = UsecaseAction("Open File", parent, usecase.get("file.open"))
         file_menu.addAction(open_action)
+
+        save_action = UsecaseAction("Save File", parent, usecase.get("file.save"))
+        file_menu.addAction(save_action)
+        
